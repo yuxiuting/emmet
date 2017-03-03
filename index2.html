@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+  *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webit-user-select:none;
+    user-select:none;
+  }
+  body,html{
+    font-family: 微软雅黑,cursive;
+    background: rgb(0, 0, 0);
+    margin: 0px;
+  }
+  #Site{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    padding: 40px;
+    color: #440a0e;
+    opacity: 0;
+    transition: opacity 400ms ease-out;
+  }
+  #Site.init{
+    opacity: 1;
+  }
+  .main-content{
+    width: 777.333px;
+    height: 583px;
+    max-width: 200vmin;
+    margin: 0auto;
+    position: relative;
+    overflow: hidden;
+  }
+  .bg-img,overflow-container{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+
+  }
+  #Background.bg-img{
+    left: 0;
+
+  }
+  .ui{
+    z-index: 100;
+    position: absolute;
+    right: 0;
+    top: 1vmin;
+    width: 20vmin;
+    right: 2vmin;
+    transition: opacity 400ms ease-out;
+  }
+  .progress-container{
+    padding-top: 180px;
+  }
+  #cont{
+    display: block;
+    height: 200px;
+    width: 200px;
+    border-radius: 100%;
+    position: absolute;
+    left: 50%;
+    top: -10px;
+    -webkit-transform:translate3d(-50%,0,0);
+    transform: translate(50%,0,0);
+  }
+  .ui h3{
+    color: #fff;
+    font-size: 4vmin;
+    margin: 0;
+    line-height: 100%;
+    text-align: center;
+  }
+  .ui h3 span.points{
+    font-size: 50%;
+  }
+  #cont{
+    display:block;
+    height: 200px;
+    width: 200px;
+    border-radius: 100%;
+    position: absolute;
+    left: 50%;
+    top: -10%;
+    transform: translate(-50%,0,0);scale(0.8);
+  }
+  .count{
+    margin-bottom: 4px;
+  }
+  .site-btn{
+    text-align: center;
+    clear: both;
+    width: 100%;
+    background: #fff;
+    padding: 4px 0;
+    margin: 8px 0;
+    cursor: pointer;
+    font-style: 3.2vmin;
+
+  }
+  .claim-btn{
+    background: #b12e28;
+    border: 2px solid #711017;
+    border-radius: 2px;
+    color: #fff;
+    padding: 0;
+    width: 80%;
+    margin: 0 auto;
+
+  }
+  .claim-btn.claimed, .claim-btn.disabled{
+    opacity: 0.4;
+    pointer-events: none;
+  }
+  #svg circle{
+    stroke-dashoffset:0;
+    transition: stroke-dashoffset 1s linear;
+    stroke:#953139;
+    stroke-width:24px;
+  }
+  #cont:after{
+    position: absolute;
+    display: block;
+    height: 137px;
+    width: 137px;
+    left: 52%;
+    top: 52%;
+    content: "";
+    transform: translate(-50%,0,0);
+    border-radius: 100%;
+    line-height: 160px;
+    background: url(./image/progress-icon.png) no-repeat center
+
+  }
+  #svg #bar{
+    stroke:#FFF;
+
+  }
+  .cauldron-container{
+    position: absolute;
+    width: 51.1%;
+    height: 64%;
+    bottom: 18.9%;
+    left: 30.7%;
+    z-index: 1;
+  }
+.cauldron{
+  width: 100%;
+  height: 50%;
+  background-image: url(.image/cauldron.png);
+  bottom: 0;
+  left: 0;
+  background-size: auto100%;
+}
+.asset{
+  position: absolute;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+/*smoke*/
+.smoke{
+  width: 50.5%;
+  height: 37.7%;
+  top: 17.8%;
+  z-index: 10;
+  background-image: url(.image/_smoke2.png);
+  background-size: auto 100%;
+  animation: smokeAnimation 1.2s infinite step(5);
+  opacity: 0.2;
+}
+ @keyframes smokeAnimation{
+   0%{
+     background-position: 0%;
+   }
+   32%{
+     background-position: 100%;
+   }
+   100%{
+     background-position: 0%;
+   }
+ }
+.platform{
+  width: 76.6%;
+  height: 18.2%;
+  background-image: url(./image/platform.png);
+  bottom: 5.9%;
+  left: -4.2%;
+  z-index: 1;
+}
+.fire-container{
+  width: 20%;
+  height: 40%;
+  bottom: 7%;
+  left: 41.4%;
+  position: absolute;
+  z-index: 1;
+}
+.fire, .highlights{
+  width: 140%;
+  height: 102%;
+  top: 21%;
+  left: -14%;
+  background-image: url(./image/fire.png);
+  background-size: auto 100%;
+  opacity: 0.2;
+}
+.fire{
+  transition-origin: 50% 64%;
+  -moz-transform-origin:50% 64%;
+  -webkit-keyframes-orign:50% 64%;
+  animation: flameAnimation 0.6s infinite steps(1);
+  -webkit-animation:flameAnimation 0.6s infinite steps(1);
+
+}
+ @keyframes flameAnimation {
+   0%{
+     background-position: 0%;
+   }
+   50%{
+     background-position: 25%;
+     transform: scale(0.8);
+   }
+   100%{
+     background-position: 0%;
+   }
+
+ }
+ .log{
+   width: 100%;
+   height: 100%;
+   background-image: url(./image/logs.png);
+   bottom: 0;
+   background-size: 100% auto;
+   background-position: center bottom;
+ }
+ .highlights{
+   background-image: url(./image/fire-highlights.png);
+   animation: highLightAnimation 0.5s infinite steps(1);
+ }
+ @keyframes highLightAnimation {
+   0%{
+     background-position: 0%;
+   }
+   50%{
+     background-position: 25%;
+   }
+   100%{
+     background-position: 0%
+   }
+ }
+ .door-mask{
+   position: absolute;
+   width: 20.8%;
+   height: 9%;
+   right: 0%;
+   top: 49.9%;
+   overflow: hidden;
+
+ }
+ .door-mask.alt{
+   animation: none;
+   -webkit-animation:none;
+   display: none;
+ }
+ .door-shadow{
+   position: absolute;
+   left: 0;
+   height: 100%;
+   width: 18%;
+   background-image: url(./image/door-shadow.png);
+   z-index: 10;
+   background-repeat: no-repeat;;
+ }
+ .minion-transition{
+   animation: minionRightMove 3.2s infinite linear;
+   -webkit-keyframes:minionRightMove 3.2s infinite linear;
+   height: 100%;
+   /*Background-color:red;*/
+   position: absolute;
+ }
+ @keyframes minionRightMove {
+   0%{
+     transform: scale3d(-1) translate3d(-300%,0,0);
+     -webkit-keyframes: scaleX(-1) translate3d(-300%,0,0);
+   }
+   25%{
+     transform: scaleX(-1) translate3d(-100%,0,0);
+     -webkit-transform:scaleX(-1) translate3d(-100%,0,0)
+   }
+   50%{
+     transform: scaleX(-1) translate3d(-100%,0,0);
+     -webkit-transform: scaleX(-1) translate3d(100%,0,0)
+   }
+ }
+ .minion-right{
+   height: 100%;
+   position: relative;
+   background-image: url(./image/minion-walk.png);
+   background-size: auto 100%;
+   background-repeat: no-repeat;
+   animation: minionWalkAnimation 0.4s infinite steps(3);
+ }
+ img.img-spacer{
+   opacity: 0;
+   height: 100%;
+
+ }
+ @keyframes minionWalkAnimation {
+   100%{
+     background-position: 100%;
+   }
+
+ }
+  .minion-right.delay1{
+    animation-delay: -.1s;
+    -webkit-animation-dealy: -.1s;
+  }
+  .minion-transition:nth-child(3){
+  animation:minionRightMove 3.2s infinite linear -1.6s;
+  -webkit-animation:minionRightMove 3.2s infinite linear -1.6s;
+}
+.minion-transition:nth-child(4)
+{
+  animation: minionRightMove 3.2s infinite linear -2.4s;
+  -webkit-animation:minionRightMove 3.2s infinite linear -2.4s;
+}
+.minion-right.delay3{
+  animation-delay: -.3s;
+  -webkit-animation-delay: -.3s;
+}
+.door-mask.alt{
+  bottom: 7%;
+  top: auto;
+  z-index: 10;
+  height: 16%;
+  width: 43%;
+
+}
+.minion-transition.alt{
+
+}
+.bottles{
+  bottom: 7.7%;
+  right: 0%;
+  width: 25%;
+  height: 24.7%;
+  background-image: url(./image/_bottles.png);
+  background-size: auto 1000%;
+  background-position: 0% 0%;
+
+}
+.catwalk-right{
+  bottom: 0;
+  right: 0;
+  width: 23%;
+  height: 44.4%;
+  background-image: url(./images/catwalk2.png);
+}
+.catwalk-left{
+  bottom: 6.9%;
+  left: 0;
+  width: 50%;
+  height: 60%;
+  background-image: url(./images/catwalk-left.png);
+  z-index: 10;
+}
+.minions-container{
+  position: absolute;
+  left: 0;
+  top: 24%;
+  width: 50%;
+  height: 15%;
+}
+.minions-container .minion-transition.static:nth-child(1){
+  left: 10%;
+  animation-delay: -.23s;
+  -webkit-animation-duration: 1.6s;
+  z-index: 7;
+}
+.minions-container .minion-transition.static:nth-child(2){
+  left: 20%;
+  z-index: 6;
+  animation-delay: -.71s;
+}
+.minions-container .minion-transition.reverse{
+  animation: minionBounceReverse 1.2s infinite linear;
+}
+@keyframes minionBounceReverse {
+  0%{
+    transform: translate3d(0%,0,0);
+    -webkit-transform:translate3d(0%,0,0);
+  }
+  50%{
+    transform: translate3d(50%,0,0);
+    -webkit-transform:translate3d(50%,0,0);
+
+  }
+  51%{
+    transform: translate3d(50%,0,0);
+    -webkit-transform: translate3d(50%,0,0) scaleX(-1);
+  }
+  100%{
+    transform: translate3d(0%,0,0) scaleX();
+    -webkit-transform: translate3d(0%,0,0) scaleX(-1);
+  }
+
+}
+.minions-container .minion-transition.static:nth-child(3){
+  left: 30%;
+  animation-delay: -.37s;
+  -webkit-animation-delay: -.37s;
+  animation-duration: 3.2s -webkit-animation-duration: 3.2s;
+}
+0%{
+  transform: translate3d(0%,0,0) scaleX(-1);
+  -webkit-transform:translated(0%0,0,0);
+}
+50%{
+  transform: translate3d(-20%,0,0) scaleX(-1);
+  -webkit-transform: translate3d(-20%,0,0) scaleX(-1);
+}
+51%{
+  transform: translate(-20%,0,0);
+  -webkit-transform:translated(-20%,0,0)
+}
+100%{
+  transform: translate(0%,0,0);
+  -webkit-transform: translate3d(0%,0,0);
+  transform: translate3d(0%,0,0);
+
+}
+,minions-container .minion-transition.static:nth-child(4){
+  left: 40%;
+  animation-delay: -.92s;
+  -webkit-animation-delay: -.92s;
+}
+.minions-container .minion-transition.static:nth-child(5){
+  left: 50%;
+  z-index: 9;
+  animation-delay: -.43s;
+  -webkit-animation-delay: -.43s;
+  animation-duration: 2.3s -webkit-animation-duration: 2.3s;
+}
+.minions-container .minion-transition.static:nth-child(6){
+  left: 60%;
+  z-index: 1;
+  -webkit-animation-delay: -.69s;
+  animation-delay: -.69s;
+}
+.minions-container .minion-transition.static:nth-child(7){
+  left: 74%;
+  z-index: 4;
+
+  -webkit-animation-delay: -.22s;
+  animation-delay: -.22s;
+  -webkit-animation-duration: 4s;
+  animation-duration: 4s;
+
+}
+.minion-transition .minion-transition.staticTwo{
+  -webkit-animation: minionBounceTwo 1.2s infinite linear;
+  animation: minionBounceTwo 1.2s infinite linear;
+  left: 56%;
+
+}
+@keyframes minionBounceTwo {
+  0%{
+    -webkit-transform:translate3d(0%,0,0);
+    transform:translate3d(0%,0,0);
+  }
+  25%{
+    -webkit-transform:translate3d(4%,0,0); ;
+    transform:translate3d(4%,0,0); ;
+  }
+  50%{
+    -webkit-transform: translate3d(0%,0,0);;
+    transform: translate3d(0%,0,0);;
+  }
+  75%{
+    -webkit-transform: translate3d(0%,-2%,0);;
+    transform: translate3d(0%,-2%,0);;
+  }
+  100%{
+    -webkit-transform: translate3d(0%,0,0);
+    transform: translate3d(0%,0,0);
+  }
+
+}
+.minions-container .minion-transition.slow{
+  animation: minionLeftMove 7.4s infinite linear -4s;
+-webkit-animation: minionLeftMove 7.4s infinite linear -4s;
+z-index: 7;
+}
+.minions-container .minion-transition.fast{
+  -webkit-animation: minionLeftMove 5s infinite linear -3s;
+  animation: minionLeftMove 5s infinite linear -3s;
+  z-index: 7;
+}@keyframes minionLeftMove {
+  0%{
+    -webkit-transform: translate3d(-100%,0,0);
+    transform: translate3d(-100%,0,0);
+  }
+  50%{
+    -webkit-transform: translate3d(250%,0,0);
+    transform: translate3d(250%,0,0);
+  }
+  51%{
+    -webkit-transform: translate3d(250%,0,0) scaleX(-1);
+    transform: translate3d(250%,0,0) scaleX(-1);
+  }
+  100%{
+    -webkit-transform: translate3d(-100%，0，0) scaleX(-1);
+    transform: translate3d(-100%，0，0) scaleX(-1);
+  }
+
+}
+.minions-container .minion-transition.fast {
+    animation: minionLeftMove 5s infinite linear -3s;
+    -webkit-animation: minionLeftMove 5s infinite linear -3s;
+    z-index: 7;
+}
+.minions-container .minion-transition.two.fast {
+    animation: minionLeftMove 4.6s infinite linear;
+    -webkit-animation: minionLeftMove 4.6s infinite linear;
+    z-index: 7;
+}
+.minions-container .minion-transition.two.slow {
+    animation: minionLeftMove 7s infinite linear -1s;
+    -webkit-animation: minionLeftMove 7s infinite linear -1s;
+    z-index: 7;
+}
+.minion-jump {
+    position: absolute;
+    height: 120%;
+    right: 1%;
+}
+.minion-jump.up .minion {
+    animation: minionJumpUp 0.3s ease-out;
+    -webkit-animation: minionJumpUp 0.3s ease-out;
+}
+
+.minion-jump.dive .minion {
+    animation: minionJumpDive 0.4s ease-in;
+    -webkit-animation: minionJumpDive 0.4s ease-in;
+}
+
+.minion-jump.pose1 .minion {
+    background-image: url(./images/minion-jump-1.png);
+}
+
+.minion-jump.pose2 .minion {
+    background-image: url(./images/minion-jump-2.png);
+}
+
+.minion-jump.pose3 .minion {
+    background-image: url(./images/minion-jump-3.png);
+}
+
+.minion-jump.pose4 .minion {
+    background-image: url(./images/minion-jump-4.png);
+}
+@keyframes minionJumpUp {
+    100% {
+        transform: translate3d(48%, -40%, 0);
+        -webkit-transform: translate3d(48%, -40%, 0);
+    }
+}
+
+@-webkit-keyframes minionJumpUp {
+    100% {
+        transform: translate3d(48%, -40%, 0);
+        -webkit-transform: translate3d(48%, -40%, 0);
+    }
+}
+
+@keyframes minionJumpDive {
+    0% {
+        transform: translate3d(48%, -40%, 0);
+        -webkit-transform: translate3d(48%, -40%, 0);
+    }
+    100% {
+        transform: translate3d(56%, 180%, 0);
+        -webkit-transform: translate3d(56%, 180%, 0);
+    }
+}
+
+@-webkit-keyframes minionJumpDive {
+    0% {
+        transform: translate3d(48%, -40%, 0);
+        -webkit-transform: translate3d(48%, -40%, 0);
+    }
+    100% {
+        transform: translate3d(56%, 180%, 0);
+        -webkit-transform: translate3d(56%, 180%, 0);
+    }
+}
+
+@keyframes minionBellowAnimation {
+    0%, 16% {
+        background-position: 0%;
+    }
+    84%, 100% {
+        background-position: 100%;
+    }
+}
+.minion {
+    height: 100%;
+    background-image: url(./images/minion-jump.png);
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+    position: relative;
+}
+}
+  </style>
+</head>
+<body style="padding-top: 42px;">
+  <div id="site" class="init">
+    <div class="main-content">
+      <div class="ui" id="UI">
+        <div class="progress-container">
+          <div id="cont">
+          <svg id="svg" width="210" height="210" viewport="0 0 100 100" version=1.1 xmlns="http://www.w3.org/2000/svg">
+            <circle r="90" cx="105" cy="105" fill="transparent" stroke-dashoffset="0">
+            </circle>
+            <circle id="bar" r="90" cx="105" cy="105" fill="transparent"
+              stroke-dasharray="565.48" stroke-dashoffset="0" style="stroke-dashoffset: 565.48px;">
+            </circle>
+          </svg>
+          <div>
+            <h3>
+              <span class="points">已献祭的小兵</span>
+              <div class="count">0</div>
+            </h3>
+            <div class="site-btn claim-btn claimed">现在领取</div>
+          </div>
+          </div>
+          <img width="777.333" height="583 "src="./images/bg.jpg" alt="" id="Background" class="bg-img"/>
+           <div class="smoke asset"></div>
+           <div id="overflowContainer" class="overflow-container">
+             <div class="catwalk-left asset"></div>
+             <div class="minions-container">
+               <div class="minion-transition static">
+                 <div class="minion-right" style="max-width: 100%;">
+                   <img class="img-spacer" src="./images/minion.png">
+                 </div>
+               </div>
+               <div class="minion-transition static reverse">
+                 <div class="minion-right delay1" style="max-width:100%;">
+                  <img src="./image/minion.png"  class="img-spacer" >
+                 </div>
+               </div>
+             <div class="minion-transition static">
+               <div class="minion-right" style="max-width:100%;">
+                 <img src="./images/minion.png"  class="img-spacer" >
+               </div>
+            </div>
+           <div class="minion-transition static reverse">
+             <div class="minion-right delay3"style="max-width: 100%">
+               <img src="./images/minion.png" class="img-spacer" >
+             </div>
+           </div>
+           <div class="minion-transition static">
+             <div class="minion-right delay1" style="max-width: 100%;">
+               <img src="./images/minion.png" class="img-spacer" >
+             </div>
+           </div>
+           <div class="minion-transition static reverse">
+             <div class="minion-right" style="max-width: 100%;">
+              <img src="./images/minion.png" class="img-spacer" >
+             </div>
+           </div>
+           <div class="minion-transition static">
+             <div class="minion-right delay2" style="max-width:100%；">
+              <img src="./images/minion.png" class="img-spacer" />
+             </div>
+           </div>
+           <div class="minion-transition static reverse">
+             <div class="minion-right" style="max-width:100%;">
+               <img src="./images/minion.png"  class="img-spacer" >
+             </div>
+           </div>
+           <div class="minion-transition staticTwo">
+              <div class="minion-right delay2" style="max-width: 100%;">
+                <img src="./images/minion.png" class="img-spacer" />
+              </div>
+           </div>
+           <div class="minion-transition">
+             <div class="minion-right delay3" style="max-width: 100%;">
+               <img src="./images/minion.png"  class="img-spacer" >
+             </div>
+           </div>
+           <div class="minion-transition slow">
+               <div class="minion-right delay1" style="max-width:100%;">
+                 <img src="./images/minion.png" class="img-spacer" >
+               </div>
+           </div>
+           <div class="minion-transition fast">
+              <div class="minion-right delay2" style="max-width:100%;">
+                <img src="./images/minion.png"  class="img-spacer" >
+              </div>
+           </div>
+           <div class="minion-transition fast two">
+              <div class="minion-right delay2" style="max-width:100%;">
+                 <img src="./images/minion.png"  class="img-spacer" >
+              </div>
+           </div>
+           <div class="minion-transition">
+              <div class="minion-right">
+                 <img src="" alt="" class="img-spacer" />
+              </div>
+           </div>
+           <div class="minion-transition two">
+               <div class="minion-right" style="max-width:100%;">
+                 <img src="./images/minion.png" class="img-spacer" >
+               </div>
+          </div>
+          <div class="minion-transition slow two">
+              <div class="minion-right delay1" style="max-width:100%;">
+                 <img src="./images/minion.png"  class="img-spacer" >
+              </div>
+          </div>
+          <div class="minion-jump">
+              <div class="minion" style="top:13%;left:33%; animation:minionJumpUp .39312s ease-out forwards;">
+                 <img src="./images/minion.png" class="img-spacer" >
+              </div>
+          </div>
+        </div>
+        <div class="cauldron-container">
+          <div class="cauldron asset">
+          </div>
+          <div class="platform asset"></div>
+          <div class="fire-container">
+            <div class="fire asset"></div>
+              <div class="logs asset"></div>
+                <div class="highlights asset"></div>
+          </div>
+          <div class="door-mask alt">
+            <div class="minion-transition alt minion-alt">
+              <div class="minion-right" style="max-width:100%;">
+                <img src="./images/minion.png"  class="img-spacer">
+              </div>
+            </div>
+          </div>
+          <div class="door-mask">
+           <div class="door-shadow"></div>
+           <div class="minion-transition">
+             <div class="minion-right delay2" style="max-width:100%;">
+               <img src="./images/minion.png" class="img-spacer">
+             </div>
+           </div>
+           <div class="minion-transition">
+             <div class="minion-right delay1" style="max-width:100%;">
+               <img src="./images/minion.png" class="img-spacer">
+             </div>
+           </div>
+           <div class="minion-transition">
+             <div class="minion-right" style="max-width: 100%;">
+               <img src="./images/minion.png" class="img-spacer">
+             </div>
+           </div>
+           <div class="minion-transition">
+             <div class="minion-right delay3" style="max-width: 100%;">
+               <img src="./images/minion.png" class="img-spacer">
+             </div>
+           </div>
+          </div>
+          <div class="catwalk-right asset"></div>
+          <div class="bottles asset"></div>
+        </div>
+     </div>
+   </div>
+        <script>
+        windows.onload = function(){
+          var bar=document.getElementById('bar');
+          bar.style.strokeDashoffset='20px';
+          var container=document.querySelector('.minions-container');
+          var jumpEle=document.createElement('div');
+          jumpEle.className='minion-jump up';
+          jumpEle.innerHTML='<div class="minion" style="top: 13%;left: 33%; animation: minionJumpUp .39312s ease-out forwards;"><img class="img-spacer" src="./images/minion.png"></div>'
+          container.appendChild(jumpEle);
+          document.querySelector('.up').addEventListener('webkitAnimationEnd',function(){
+            this.classList.add('dive');
+            this.classList.add('pop1');
+            document.querySelector('.dive').addEventListener('webkitAnimationEnd',
+        function(){
+          this.parentNode.removeChild(this);
+        }  )
+          })
+        }
+        </script>
+</body>
+</html>
